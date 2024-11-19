@@ -8,3 +8,5 @@ op_env/
 __pycache__/
 db.sqlite3
 staticfiles/
+# Environment variables
+.env
