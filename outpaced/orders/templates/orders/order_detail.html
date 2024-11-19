@@ -1,0 +1,44 @@
+<!-- orders/templates/orders/order_detail.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Order {{ order.id }} - SportsShop{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Order #{{ order.id }}</h2>
+    <p><strong>Date:</strong> {{ order.created|date:"F d, Y H:i" }}</p>
+    <p><strong>Status:</strong>
+        {% if order.status == 'P' %}
+            <span class="badge bg-warning text-dark">Pending</span>
+        {% elif order.status == 'C' %}
+            <span class="badge bg-success">Completed</span>
+        {% elif order.status == 'F' %}
+            <span class="badge bg-danger">Failed</span>
+        {% endif %}
+    </p>
+    <h4>Order Items</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.items.all %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ item.price }}</td>
+                    <td>${{ item.get_total_price }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h4 class="text-end">Grand Total: ${{ order.total }}</h4>
+</div>
+{% endblock %}

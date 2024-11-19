@@ -1,0 +1,18 @@
+/* products/static/products/css/styles.css */
+
+body {
+    padding-top: 70px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #f8f9fa;
+}

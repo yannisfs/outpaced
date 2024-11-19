@@ -1,0 +1,34 @@
+<!-- templates/news/news_detail.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ news_item.title }} - SportsShop{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card">
+                {% if news_item.image %}
+                    <img src="{{ news_item.image.url }}" class="card-img-top news-detail-image" alt="{{ news_item.title }}">
+                {% else %}
+                    <img src="{% static 'images/default-news.jpg' %}" class="card-img-top news-detail-image" alt="Default News Image">
+                {% endif %}
+                <div class="card-body">
+                    <h2 class="card-title">{{ news_item.title }}</h2>
+                    <p class="text-muted">
+                        Published on {{ news_item.published_date|date:"F j, Y" }} by {{ news_item.author.username }}
+                    </p>
+                    <hr>
+                    <p class="card-text">{{ news_item.content|linebreaks }}</p>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <a href="{% url 'news:homepage' %}" class="btn btn-secondary">Back to Home</a>
+                    <small class="text-muted">Category: {{ news_item.get_category_display }}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

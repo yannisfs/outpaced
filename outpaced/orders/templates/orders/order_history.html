@@ -1,0 +1,46 @@
+<!-- orders/templates/orders/order_history.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Order History - SportsShop{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>My Orders</h2>
+    {% if orders %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.created|date:"F d, Y H:i" }}</td>
+                        <td>
+                            {% if order.status == 'P' %}
+                                <span class="badge bg-warning text-dark">Pending</span>
+                            {% elif order.status == 'C' %}
+                                <span class="badge bg-success">Completed</span>
+                            {% elif order.status == 'F' %}
+                                <span class="badge bg-danger">Failed</span>
+                            {% endif %}
+                        </td>
+                        <td>${{ order.total }}</td>
+                        <td><a href="{% url 'orders:order_detail' order.id %}" class="btn btn-sm btn-info">View</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You have no orders yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

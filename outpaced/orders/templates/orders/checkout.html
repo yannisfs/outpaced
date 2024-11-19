@@ -1,0 +1,39 @@
+<!-- orders/templates/orders/checkout.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Checkout - SportsShop{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Checkout</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <h4>Order Summary</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart.items.all %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>${{ item.product.price }}</td>
+                        <td>${{ item.get_total_price }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h4 class="text-end">Grand Total: ${{ cart.get_total_price }}</h4>
+        <button type="submit" class="btn btn-success">Place Order</button>
+    </form>
+</div>
+{% endblock %}

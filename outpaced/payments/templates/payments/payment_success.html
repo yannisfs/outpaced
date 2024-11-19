@@ -1,0 +1,14 @@
+<!-- payments/templates/payments/payment_success.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Payment Successful - SportsShop{% endblock %}
+
+{% block content %}
+<div class="container mt-4 text-center">
+    <h2>Payment Successful!</h2>
+    <p>Your payment has been processed successfully.</p>
+    <a href="{% url 'orders:order_history' %}" class="btn btn-primary">View My Orders</a>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+<!-- orders/templates/orders/order_cancel.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Order Canceled - SportsShop{% endblock %}
+
+{% block content %}
+<div class="container mt-4 text-center">
+    <h2>Order Canceled</h2>
+    <p>Your order has been canceled. You can continue shopping.</p>
+    <a href="{% url 'products:product_list' %}" class="btn btn-primary">Continue Shopping</a>
+</div>
+{% endblock %}

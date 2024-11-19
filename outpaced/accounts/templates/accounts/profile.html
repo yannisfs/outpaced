@@ -1,0 +1,22 @@
+<!-- accounts/templates/accounts/profile.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Profile - SportsShop{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>My Profile</h2>
+    <form method="post">
+        {% csrf_token %}
+        <h4>User Information</h4>
+        {{ user_form.as_p }}
+        
+        <h4>Profile Information</h4>
+        {{ profile_form.as_p }}
+        
+        <button type="submit" class="btn btn-success">Update Profile</button>
+    </form>
+</div>
+{% endblock %}
